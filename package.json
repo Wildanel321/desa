@@ -1,0 +1,23 @@
+{
+  "name": "toyamas-smart-village",
+  "version": "1.0.0",
+  "description": "Toyamas Smart Village Platform: aplikasi pengelolaan desa modern dengan analisis pengaduan dan asisten layanan warga.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --no-warnings server.js",
+    "dev": "node --no-warnings --watch server.js",
+    "reset-db": "node -e \"const fs=require('fs');if(fs.existsSync('./data/toyamas.db'))fs.unlinkSync('./data/toyamas.db');console.log('Database demo dihapus. Jalankan npm start untuk membuat ulang data awal.');\""
+  },
+  "keywords": [
+    "smart-village",
+    "desa-digital",
+    "express",
+    "sqlite",
+    "studi-kasus"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1"
+  }
+}

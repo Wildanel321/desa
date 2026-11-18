@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toyamas | Platform Pengelolaan Desa</title>
+  <meta name="description" content="Toyamas Smart Village Platform untuk pengelolaan pengaduan masyarakat, analisis laporan, asisten layanan desa, dan informasi pemerintahan Desa Toyamas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Langsung ke konten utama</a>
+
+  <div class="app-shell">
+    <div id="drawer-backdrop" class="drawer-backdrop" hidden></div>
+
+    <aside id="sidebar" class="sidebar" aria-label="Menu navigasi desa">
+      <div class="sidebar-brand">
+        <a href="#dashboard" class="brand-link" data-nav="dashboard">
+          <span class="brand-mark" aria-hidden="true">TM</span>
+          <span class="brand-text">
+            <span class="brand-name">Toyamas</span>
+            <span class="brand-sub">Platform Desa Digital</span>
+          </span>
+        </a>
+        <button type="button" id="sidebar-close-btn" class="icon-btn sidebar-close-btn" aria-label="Tutup menu navigasi">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Navigasi utama">
+        <a href="#dashboard" class="nav-item" data-nav="dashboard">
+          <span class="nav-icon" data-icon="dashboard" aria-hidden="true"></span>
+          <span>Dashboard</span>
+        </a>
+        <a href="#pengaduan" class="nav-item" data-nav="pengaduan">
+          <span class="nav-icon" data-icon="complaints" aria-hidden="true"></span>
+          <span>Pengaduan Masyarakat</span>
+          <span id="nav-open-count" class="nav-count" aria-label="Pengaduan aktif">0</span>
+        </a>
+        <a href="#analyzer" class="nav-item" data-nav="analyzer">
+          <span class="nav-icon" data-icon="analyzer" aria-hidden="true"></span>
+          <span>AI Complaint Analyzer</span>
+        </a>
+        <a href="#asisten" class="nav-item" data-nav="asisten">
+          <span class="nav-icon" data-icon="assistant" aria-hidden="true"></span>
+          <span>AI Village Assistant</span>
+        </a>
+        <a href="#informasi" class="nav-item" data-nav="informasi">
+          <span class="nav-icon" data-icon="village" aria-hidden="true"></span>
+          <span>Informasi Desa</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div id="sidebar-auth-box" class="auth-box"></div>
+        <p class="demo-footprint">
+          Lingkungan Demo Studi Kasus. Data penduduk dan laporan awal bersifat simulasi.
+        </p>
+      </div>
+    </aside>
+
+    <div class="app-body">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button type="button" id="menu-toggle-btn" class="btn btn-secondary menu-toggle-btn" aria-controls="sidebar" aria-expanded="false">
+            <span class="btn-icon" data-icon="menu" aria-hidden="true"></span>
+            <span>Menu</span>
+          </button>
+          <div class="topbar-title-group">
+            <p id="topbar-context" class="topbar-context">Desa Toyamas, Kec. Sukamaju</p>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <button type="button" id="topbar-new-complaint-btn" class="btn btn-primary">
+            <span class="btn-icon" data-icon="plus" aria-hidden="true"></span>
+            <span>Buat Pengaduan</span>
+          </button>
+          <button type="button" id="topbar-auth-btn" class="btn btn-secondary">
+            <span class="btn-icon" data-icon="shield" aria-hidden="true"></span>
+            <span id="topbar-auth-label">Masuk Admin</span>
+          </button>
+        </div>
+      </header>
+
+      <main id="main-content" class="main-content" tabindex="-1">
+        <div class="state-card">
+          <div class="spinner" aria-hidden="true"></div>
+          <p class="state-title">Memuat data Desa Toyamas</p>
+          <p class="state-desc">Menghubungkan ke basis data lokal aplikasi.</p>
+        </div>
+      </main>
+
+      <footer class="app-footer">
+        <p>Toyamas Smart Village Platform (Prototipe Studi Kasus). Tidak menggunakan data pribadi penduduk sungguhan.</p>
+      </footer>
+    </div>
+  </div>
+
+  <nav class="bottom-nav" aria-label="Navigasi utama ponsel">
+    <a href="#dashboard" class="bottom-nav-item" data-nav="dashboard">
+      <span class="nav-icon" data-icon="dashboard" aria-hidden="true"></span>
+      <span>Beranda</span>
+    </a>
+    <a href="#pengaduan" class="bottom-nav-item" data-nav="pengaduan">
+      <span class="nav-icon" data-icon="complaints" aria-hidden="true"></span>
+      <span>Aduan</span>
+    </a>
+    <a href="#analyzer" class="bottom-nav-item" data-nav="analyzer">
+      <span class="nav-icon" data-icon="analyzer" aria-hidden="true"></span>
+      <span>Analisis</span>
+    </a>
+    <a href="#asisten" class="bottom-nav-item" data-nav="asisten">
+      <span class="nav-icon" data-icon="assistant" aria-hidden="true"></span>
+      <span>Asisten</span>
+    </a>
+    <a href="#informasi" class="bottom-nav-item" data-nav="informasi">
+      <span class="nav-icon" data-icon="village" aria-hidden="true"></span>
+      <span>Desa</span>
+    </a>
+  </nav>
+
+  <div id="modal-root"></div>
+  <div id="toast-root" class="toast-root" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>
