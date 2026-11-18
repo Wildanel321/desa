@@ -1,4 +1,5 @@
 const fs = require('fs');
+const os = require('os');
 const path = require('path');
 const { DatabaseSync } = require('node:sqlite');
 const {
@@ -7,15 +8,24 @@ const {
   INITIAL_ACTIVITY_LOGS
 } = require('../data/seedData');
 
-const DATA_DIR = path.join(__dirname, '..', '..', 'data');
-const DB_PATH = path.join(DATA_DIR, 'toyamas.db');
+// Vercel Functions have a read-only deployment directory; use /tmp for demo SQLite on Vercel.
+const DB_PATH = process.env.SQLITE_DB_PATH
+  ? path.resolve(process.env.SQLITE_DB_PATH)
+  : process.env.VERCEL
+    ? path.join(os.tmpdir(), 'toyamas.db')
+    : path.join(__dirname, '..', '..', 'data', 'toyamas.db');
 
-if (!fs.existsSync(DATA_DIR)) {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
+const dbDir = path.dirname(DB_PATH);
+if (!fs.existsSync(dbDir)) {
+  fs.mkdirSync(dbDir, { recursive: true });
 }
 
 const db = new DatabaseSync(DB_PATH);
-db.exec('PRAGMA journal_mode = WAL;');
+try {
+  db.exec('PRAGMA journal_mode = WAL;');
+} catch {
+  // Keep default journal mode if WAL is unavailable on ephemeral storage.
+}
 db.exec('PRAGMA foreign_keys = ON;');
 
 db.exec(`

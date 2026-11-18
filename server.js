@@ -38,6 +38,10 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Terjadi kesalahan internal pada server.' });
 });
 
-app.listen(PORT, () => {
-  console.log(`Toyamas Smart Village Platform aktif di http://localhost:${PORT}`);
-});
+if (!process.env.VERCEL && require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Toyamas Smart Village Platform aktif di http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;

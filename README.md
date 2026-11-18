@@ -83,6 +83,30 @@ npm run reset-db
 npm start
 ```
 
+## Deploy ke Vercel
+
+Proyek ini sudah dikonfigurasi untuk berjalan langsung di **Vercel Functions (Fluid Compute)** dengan dukungan bawaan Express dan aset statis pada folder `public/`.
+
+### 1. Melalui Vercel Dashboard (GitHub / GitLab / Bitbucket)
+1. Push repositori ini ke GitHub.
+2. Buka [Vercel Dashboard](https://vercel.com/), klik **Add New > Project**, lalu impor repositori.
+3. Biarkan pengaturan build secara otomatis (Vercel mendeteksi `server.js`, `vercel.json`, dan `public/`).
+4. (Opsional) Tambahkan Environment Variables di menu **Settings > Environment Variables**:
+   - `AUTH_SECRET`: kunci rahasia acak untuk token sesi admin demo.
+   - `DEMO_ADMIN_EMAIL` & `DEMO_ADMIN_PASSWORD`: jika ingin mengubah kredensial admin demo.
+   - `GEMINI_API_KEY`: opsional; jika dikosongkan, fitur AI otomatis berjalan pada **Mode Simulasi Lokal**.
+5. Klik **Deploy**.
+
+### 2. Melalui Vercel CLI
+```bash
+vercel login
+vercel          # preview deployment
+vercel --prod   # production deployment
+```
+
+### Catatan Penyimpanan SQLite di Vercel
+Filesystem direktori proyek pada Vercel Functions bersifat *read-only*. Saat berjalan di Vercel (`VERCEL=1`), aplikasi otomatis menyimpan database demo di `/tmp/toyamas.db` dan mengisinya dengan data simulasi awal. Data bertahan selama instance Fluid Compute tetap aktif dan akan kembali ke data awal saat *cold start* atau *redeploy*, sehingga cocok untuk kebutuhan presentasi dan studi kasus. Untuk persistensi permanen lintas instance pada lingkungan produksi, gunakan database terkelola seperti **Turso** (SQLite cloud) atau **Neon Postgres** melalui Vercel Marketplace.
+
 ## Struktur Proyek
 
 ```text

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "fluid": true,
+  "regions": ["sin1"],
+  "functions": {
+    "server.js": {
+      "excludeFiles": "{data/**,public/js/**,public/css/**}"
+    }
+  }
+}
